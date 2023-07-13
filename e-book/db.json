@@ -229,7 +229,7 @@
   ],
   "wishlist": [
     {
-      "wishlistCount": 0,
+      "wishlistCount": true,
       "id": 1
     }
   ]

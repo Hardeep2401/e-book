@@ -7,40 +7,71 @@ import { WishlistService } from 'src/app/services/wishlist.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  wishlistNumber: any; 
-  wishlistCountNumber:any;
-  products: any;   
-  searchBox:any = '';
-  filteredProducts:any;
-  constructor(private WishlistService: WishlistService, private productServices: ProductService) { }
-  // this function check wishlist length
-  ngDoCheck() {
-    this.wishlistNumber = this.WishlistService.getWishlistCount();
-  }
+  products: any;
+  searchBox: any = '';
+  filteredProducts: any;
+  wishlistData: any;
+  wishlistNumber: any;
+  wishlistLength: any;
+  localData : any;
+  constructor(
+    private WishlistService: WishlistService,
+    private productServices: ProductService
+  ) { }
+  // count of wishlist number
+  listData:any;
+
+  // implement OnInit
   ngOnInit() {
     this.getProductData();
- 
+    this.addWishlistCount(); 
+    this.valueWishlist();  
+    // this.getWishlist();
   }
-  // this function for searching products 
+
+  valueWishlist() {
+    const WishlistA = this.wishlistData = this.WishlistService.getWishlistCount();  
+    const WishlistB = 1;
+    this.listData = WishlistA + WishlistB ;
+   let setCount = localStorage.getItem("wishCount")
+   this.listData = setCount;
+  }
+
+
+  // this function check wishlist length
+  ngDoCheck() {
+    // this.getWishlist(); 
+    this.valueWishlist();
+  } 
+  
+  // getWishlist() {
+  //  let store = this.wishlistData = this.WishlistService.getWishlistCount();
+  //    this.localData = store;
+  //   console.log(this.localData)  
+  // }
+  
+  // this function for searching products
   getProductData() {
     this.productServices.getProducts().subscribe((data: any) => {
-      this.products = data; 
-      // this is show wishlist count number
-    this.WishlistService.getWishCount().subscribe((data) =>{
-      console.log(data);
-      this.wishlistNumber = data;
-    })
-    });
-   } 
-
- searchData() { 
-    const searchTermLowerCase = this.searchBox.toLowerCase();
-    this.filteredProducts = this.products.filter((product: any) => {
-      // console.log(searchTermLowerCase)
-      return product.name.toLowerCase().includes(searchTermLowerCase);
-     
+      this.products = data;
     });
   }
- }
 
- 
+  // this is search bar 
+  searchData() {
+    const searchTermLowerCase = this.searchBox.toLowerCase();
+    this.filteredProducts = this.products.filter((product: any) => {
+  // console.log(searchTermLowerCase) 
+      return product.name.toLowerCase().includes(searchTermLowerCase);
+    });
+  }
+
+  // this is show wishlist count number 
+  addWishlistCount() {
+    // this.WishlistService.getWishCount().subscribe((data) => {
+    //   this.wishlistNumber = data;
+    //   const setWishlistLength = this.wishlistNumber.length;
+    //   this.wishlistLength = setWishlistLength;
+    // });
+  }
+}
