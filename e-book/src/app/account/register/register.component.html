@@ -27,7 +27,7 @@
           <h5 class="card-title text-center text-primary">E-Book Sign Up</h5>
         </div>
         <div class="card-body">
-          <form action="" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label class="form-label small text-muted">First Name <span class="text-danger">*</span></label>
               <input type="text" class="form-control shadow-sm rounded-0 small" placeholder="First Name"

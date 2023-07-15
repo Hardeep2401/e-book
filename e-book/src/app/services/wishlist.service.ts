@@ -8,10 +8,10 @@ import { environment } from 'src/environments/environment.development';
 export class WishlistService {
   wishlistCount: number = 0 ;
   wishlists: any;
-  wishlistNumber:any;
+  wishlistNumber:any; 
   constructor(private http:HttpClient) {}
   // this is add count wishlist 
-  setWishlistCount(count: any): void {
+  setWishlistCount(count: any): void { 
     this.wishlistCount = count;
   }
   // this is show count wishlist 
@@ -25,9 +25,9 @@ export class WishlistService {
   addWishlist(data:any) { 
     return this.http.post(environment.apiPath +'wishlist', data);
   }
-
-  // removeWishlist(data:any) {
-  //   return this.http.delete(environment.apiPath + 'wishlist', data )
-  // }
-
+  removeWishlist(id: any) { 
+    return this.http.delete(environment.apiPath +'/'+id);
+  }
+  
+ 
 }

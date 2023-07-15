@@ -36,12 +36,11 @@
     <!-- /filter button -->
     <div class="col-12 col-md-6 col-lg-3 e-book" *ngFor="
         let product of productImg
-          | filter : searchLanguage : searchBinding : searchPrice
-      ">
+          | filter : searchLanguage : searchBinding : searchPrice">
       <!-- card -->
       <div class="card shadow-sm rounded-0 border-0 position-relative">
         <img src="/assets/image/{{ product.image }}" class="img-fluid object-fit-fill border-bottom" alt="nature" />
-        <span class="position-absolute top-0 end-0 m-2 border rounded-5 p-1 bg-white shadow-sm pe-auto"
+        <span class="position-absolute top-0 end-0 m-2 border rounded-5 p-1 bg-white shadow-sm pe-auto" 
           (click)="wishlistToggle($event)">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"  >
             <path fill=""

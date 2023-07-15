@@ -13,65 +13,52 @@ export class HeaderComponent {
   wishlistData: any;
   wishlistNumber: any;
   wishlistLength: any;
-  localData : any;
+  localData: any;
   constructor(
     private WishlistService: WishlistService,
     private productServices: ProductService
-  ) { }
-  // count of wishlist number
-  listData:any;
+  ) {}
 
   // implement OnInit
-  ngOnInit() {
+  ngOnInit() { 
+    this.addWishlistCount();
     this.getProductData();
-    this.addWishlistCount(); 
-    this.valueWishlist();  
-    // this.getWishlist();
   }
-
-  valueWishlist() {
-    const WishlistA = this.wishlistData = this.WishlistService.getWishlistCount();  
-    const WishlistB = 1;
-    this.listData = WishlistA + WishlistB ;
-   let setCount = localStorage.getItem("wishCount")
-   this.listData = setCount;
-  }
-
 
   // this function check wishlist length
   ngDoCheck() {
-    // this.getWishlist(); 
-    this.valueWishlist();
-  } 
+    this.getWishlist(); 
+  }
+
+  getWishlist() {
+    let store = this.wishlistData = this.WishlistService.getWishlistCount();
+    this.localData = store;
+    // console.log(this.localData)
   
-  // getWishlist() {
-  //  let store = this.wishlistData = this.WishlistService.getWishlistCount();
-  //    this.localData = store;
-  //   console.log(this.localData)  
-  // }
-  
+   }
+
   // this function for searching products
   getProductData() {
     this.productServices.getProducts().subscribe((data: any) => {
       this.products = data;
-    });
+    }); 
   }
 
-  // this is search bar 
+  // this is search bar
   searchData() {
     const searchTermLowerCase = this.searchBox.toLowerCase();
     this.filteredProducts = this.products.filter((product: any) => {
-  // console.log(searchTermLowerCase) 
+      // console.log(searchTermLowerCase)
       return product.name.toLowerCase().includes(searchTermLowerCase);
     });
   }
 
-  // this is show wishlist count number 
+  // this is show wishlist count number
   addWishlistCount() {
-    // this.WishlistService.getWishCount().subscribe((data) => {
-    //   this.wishlistNumber = data;
-    //   const setWishlistLength = this.wishlistNumber.length;
-    //   this.wishlistLength = setWishlistLength;
-    // });
+    this.WishlistService.getWishCount().subscribe((data) => {
+      this.wishlistNumber = data;
+      const setWishlistLength = this.wishlistNumber.length;
+      this.wishlistLength = setWishlistLength;
+    });
   }
 }
