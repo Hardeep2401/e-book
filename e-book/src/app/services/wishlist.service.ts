@@ -25,9 +25,9 @@ export class WishlistService {
   addWishlist(data:any) { 
     return this.http.post(environment.apiPath +'wishlist', data);
   }
-  removeWishlist(id: any) { 
-    return this.http.delete(environment.apiPath +'/'+id);
+  removeWishlist(count:any) { 
+    return this.http.delete(environment.apiPath +'wishlist/',count);
   }
   
- 
+  
 }

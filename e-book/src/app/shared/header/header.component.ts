@@ -17,31 +17,31 @@ export class HeaderComponent {
   constructor(
     private WishlistService: WishlistService,
     private productServices: ProductService
-  ) {}
+  ) { }
 
   // implement OnInit
-  ngOnInit() { 
+  ngOnInit() {
     this.addWishlistCount();
     this.getProductData();
+
   }
 
   // this function check wishlist length
   ngDoCheck() {
-    this.getWishlist(); 
+    this.getWishlist();
   }
 
   getWishlist() {
     let store = this.wishlistData = this.WishlistService.getWishlistCount();
     this.localData = store;
-    // console.log(this.localData)
-  
-   }
+    console.log(this.localData)
+  }
 
   // this function for searching products
   getProductData() {
     this.productServices.getProducts().subscribe((data: any) => {
       this.products = data;
-    }); 
+    });
   }
 
   // this is search bar
