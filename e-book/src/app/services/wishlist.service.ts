@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,9 @@ export class WishlistService {
   // store wishlist 
   addWishlist(data:any) { 
     return this.http.post(environment.apiPath +'wishlist', data);
+  } 
+  removeWishlist(item: any): Observable<any> {
+    const url = `${environment.apiPath}/${item}`;
+    return this.http.delete(url);
   }
-  removeWishlist(count:any) { 
-    return this.http.delete(environment.apiPath +'wishlist/',count);
-  }
-  
-  
 }

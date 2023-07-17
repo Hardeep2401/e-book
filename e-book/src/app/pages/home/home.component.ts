@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ProductService } from 'src/app/services/product/product.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
@@ -11,10 +12,12 @@ export class HomeComponent {
   productImg: any;
   wishlistCount: boolean = false;
   count: number = 0;
-
+  item:any;
+  removeWishlist: any;
   constructor(
     private productServices: ProductService,
-    private WishlistService: WishlistService
+    private WishlistService: WishlistService,
+    private http:HttpClient
   ) { }
   // this is filter for language
   searchLanguage: string = 'all';
@@ -33,13 +36,18 @@ export class HomeComponent {
   }
 
   // active class add and remove
-  wishlistToggle(event: any) {
+  wishlistToggle(event: any, item:any) {
     const cardElement = event.srcElement;
     const activeClass = cardElement.classList.contains('CardWishList');
 
     if (activeClass) {
       cardElement.classList.remove('CardWishList');
-      this.count--;   
+      this.count--; 
+      this.WishlistService.removeWishlist(item).subscribe((data) => { 
+      console.log(data)
+      }, (error) => { 
+        console.log(error)
+      });
     } else {
       cardElement.classList.add('CardWishList');
       this.count++

@@ -225,9 +225,29 @@
       "price": "350",
       "image": "images.jpeg",
       "id": 12
+    },
+    {
+      "name": "D",
+      "author": "H",
+      "binding": "Kinder",
+      "language": "Hindi",
+      "price": "111",
+      "image": "1c6fb045d11b648b4c899427823b34dc.jpg",
+      "id": 13
     }
   ],
   "wishlist": [
- 
+    {
+      "count": 1,
+      "id": 1
+    },
+    {
+      "count": 2,
+      "id": 2
+    },
+    {
+      "count": 1,
+      "id": 3
+    }
   ]
 }
